@@ -9,6 +9,7 @@ interface Props {
   playerName: string;
   setPlayerName: Dispatch<SetStateAction<string>>;
   setPlayerSign: Dispatch<SetStateAction<SideSign | undefined>>;
+  setIsChangingPassword: Dispatch<SetStateAction<boolean>>;
   children?: React.ReactNode;
 }
 
@@ -16,6 +17,7 @@ export function PlayerMenu({
   playerName,
   setPlayerName,
   setPlayerSign,
+  setIsChangingPassword,
   children,
 }: Props) {
   return (
@@ -23,7 +25,7 @@ export function PlayerMenu({
       <label style={{ textAlign: "center" }}>{playerName}</label>
       {children}
       <FlexBox direction="column">
-        <ChangePasswordButton playerName={playerName} />
+        <ChangePasswordButton setIsChangingPassword={setIsChangingPassword} />
         <LogoutButton
           setPlayerName={setPlayerName}
           setPlayerSign={setPlayerSign}

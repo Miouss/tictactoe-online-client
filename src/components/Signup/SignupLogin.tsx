@@ -5,7 +5,7 @@ import {
   Username,
   Password,
   Submit,
-} from "./styles";
+} from "../../styles";
 
 interface Props {
   setPlayerName: Dispatch<SetStateAction<string>>;

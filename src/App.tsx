@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
-import { Tictactoe, Lobby, Signup, PlayerMenu } from "./components";
+import {
+  Tictactoe,
+  Lobby,
+  Signup,
+  PlayerMenu,
+  ChangePasswordForm,
+} from "./components";
 import { SideSign } from "@types";
 import { fetchServer } from "./utils";
+import { FlexBox } from "./styles";
 
 export default function App() {
   const [playerName, setPlayerName] = useState("");
   const [playerSign, setPlayerSign] = useState<SideSign>();
   const [hasGameStarted, setHasGameStarted] = useState(false);
+  const [isChangingPassword, setIsChangingPassword] = useState(false);
 
   const isPlayerConnected = playerName !== "";
-
-  const style = {
-    display: "flex",
-    flexDirection: "column" as "column",
-    gap: "2rem",
-  };
 
   useEffect(() => {
     const method = "POST";
@@ -29,16 +31,16 @@ export default function App() {
         console.log("reconnected");
         setPlayerName(username);
       } catch (err) {
-        console.log("not reconnected");
-        console.log(err);
+        console.error(err);
       }
     };
 
     reconnect();
   }, []);
 
+  console.log("is changing password", isChangingPassword);
   return (
-    <div style={style}>
+    <FlexBox direction="column" gap="2rem">
       {isPlayerConnected ? (
         <>
           {hasGameStarted && <Tictactoe playerSign={playerSign} />}
@@ -46,17 +48,25 @@ export default function App() {
             playerName={playerName}
             setPlayerName={setPlayerName}
             setPlayerSign={setPlayerSign}
+            setIsChangingPassword={setIsChangingPassword}
           >
-            <Lobby
-              playerName={playerName}
-              setPlayerSign={setPlayerSign}
-              setHasGameStarted={setHasGameStarted}
-            />
+            {isChangingPassword ? (
+              <ChangePasswordForm
+                playerName={playerName}
+                setIsChangingPassword={setIsChangingPassword}
+              />
+            ) : (
+              <Lobby
+                playerName={playerName}
+                setPlayerSign={setPlayerSign}
+                setHasGameStarted={setHasGameStarted}
+              />
+            )}
           </PlayerMenu>
         </>
       ) : (
         <Signup setPlayerName={setPlayerName} />
       )}
-    </div>
+    </FlexBox>
   );
 }

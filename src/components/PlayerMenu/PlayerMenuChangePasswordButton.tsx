@@ -1,11 +1,12 @@
+import { Dispatch, SetStateAction } from "react";
 import { fetchServer } from "../../utils";
 
 interface Props {
-  playerName: string;
+  setIsChangingPassword: Dispatch<SetStateAction<boolean>>;
 }
 
-export function PlayerMenuChangePasswordButton({ playerName }: Props) {
-  const changePassword = async () => {
+export function PlayerMenuChangePasswordButton({ setIsChangingPassword }: Props) {
+  /*const changePassword = async () => {
     const username = playerName;
     let password = prompt("Enter your current password");
     let newPassword = prompt("Enter your new password");
@@ -23,7 +24,7 @@ export function PlayerMenuChangePasswordButton({ playerName }: Props) {
     } catch (err: any) {
       alert(err.message);
     }
-  };
+  };*/
 
-  return <button onClick={changePassword}>Change Password</button>;
+  return <button onClick={() => setIsChangingPassword(true)}>Change Password</button>;
 }
