@@ -4,3 +4,4 @@ export * from "./Signup/Signup";
 export * from "./PlayerMenu/PlayerMenu";
 export * from "./Forms/ChangePasswordForm";
 export * from "./Forms/DeleteAccountForm";
+export * from "./MainMenu/MainMenu";

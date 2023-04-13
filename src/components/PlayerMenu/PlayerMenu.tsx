@@ -28,11 +28,11 @@ export function PlayerMenu({
       {children}
       <FlexBox direction="column">
         <ChangePasswordButton setIsChangingPassword={setIsChangingPassword} />
+        <DelAccountButton setIsDeletingAccount={setIsDeletingAccount} />
         <LogoutButton
           setPlayerName={setPlayerName}
           setPlayerSign={setPlayerSign}
         />
-        <DelAccountButton setIsDeletingAccount={setIsDeletingAccount} />
       </FlexBox>
     </FlexBox>
   );
