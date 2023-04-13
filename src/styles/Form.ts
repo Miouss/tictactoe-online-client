@@ -7,6 +7,10 @@ export const Form = styled("form")({
   textAlign: "center",
 });
 
+Form.defaultProps = {
+  method: "POST"
+};
+
 export const Username = styled("input")({});
 
 Username.defaultProps = {

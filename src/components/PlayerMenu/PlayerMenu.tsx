@@ -10,6 +10,7 @@ interface Props {
   setPlayerName: Dispatch<SetStateAction<string>>;
   setPlayerSign: Dispatch<SetStateAction<SideSign | undefined>>;
   setIsChangingPassword: Dispatch<SetStateAction<boolean>>;
+  setIsDeletingAccount: Dispatch<SetStateAction<boolean>>;
   children?: React.ReactNode;
 }
 
@@ -18,6 +19,7 @@ export function PlayerMenu({
   setPlayerName,
   setPlayerSign,
   setIsChangingPassword,
+  setIsDeletingAccount,
   children,
 }: Props) {
   return (
@@ -30,11 +32,7 @@ export function PlayerMenu({
           setPlayerName={setPlayerName}
           setPlayerSign={setPlayerSign}
         />
-        <DelAccountButton
-          playerName={playerName}
-          setPlayerName={setPlayerName}
-          setPlayerSign={setPlayerSign}
-        />
+        <DelAccountButton setIsDeletingAccount={setIsDeletingAccount} />
       </FlexBox>
     </FlexBox>
   );

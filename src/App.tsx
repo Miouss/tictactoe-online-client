@@ -5,6 +5,7 @@ import {
   Signup,
   PlayerMenu,
   ChangePasswordForm,
+  DeleteAccountForm,
 } from "./components";
 import { SideSign } from "@types";
 import { fetchServer } from "./utils";
@@ -15,8 +16,37 @@ export default function App() {
   const [playerSign, setPlayerSign] = useState<SideSign>();
   const [hasGameStarted, setHasGameStarted] = useState(false);
   const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [isDeletingAccount, setIsDeletingAccount] = useState(false);
 
   const isPlayerConnected = playerName !== "";
+
+  const DynamicMenu = () => {
+    if (isDeletingAccount) {
+      return (
+        <DeleteAccountForm
+          playerName={playerName}
+          setPlayerName={setPlayerName}
+          setPlayerSign={setPlayerSign}
+        />
+      );
+    }
+
+    if (isChangingPassword) {
+      return (
+        <ChangePasswordForm
+          playerName={playerName}
+          setIsChangingPassword={setIsChangingPassword}
+        />
+      );
+    }
+    return (
+      <Lobby
+        playerName={playerName}
+        setPlayerSign={setPlayerSign}
+        setHasGameStarted={setHasGameStarted}
+      />
+    );
+  };
 
   useEffect(() => {
     const method = "POST";
@@ -38,7 +68,18 @@ export default function App() {
     reconnect();
   }, []);
 
-  console.log("is changing password", isChangingPassword);
+  useEffect(() => {
+    if (isDeletingAccount) {
+      setIsChangingPassword(false);
+    }
+  }, [isDeletingAccount]);
+
+  useEffect(() => {
+    if (isChangingPassword) {
+      setIsDeletingAccount(false);
+    }
+  }, [isChangingPassword]);
+
   return (
     <FlexBox direction="column" gap="2rem">
       {isPlayerConnected ? (
@@ -49,19 +90,9 @@ export default function App() {
             setPlayerName={setPlayerName}
             setPlayerSign={setPlayerSign}
             setIsChangingPassword={setIsChangingPassword}
+            setIsDeletingAccount={setIsDeletingAccount}
           >
-            {isChangingPassword ? (
-              <ChangePasswordForm
-                playerName={playerName}
-                setIsChangingPassword={setIsChangingPassword}
-              />
-            ) : (
-              <Lobby
-                playerName={playerName}
-                setPlayerSign={setPlayerSign}
-                setHasGameStarted={setHasGameStarted}
-              />
-            )}
+            <DynamicMenu />
           </PlayerMenu>
         </>
       ) : (
