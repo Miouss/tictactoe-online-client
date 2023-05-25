@@ -19,6 +19,8 @@ export function MainMenu({ playerName, setPlayerName }: Props) {
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [isDeletingAccount, setIsDeletingAccount] = useState(false);
 
+  const isManagingLobby = !isChangingPassword && !isDeletingAccount;
+
   const DynamicMenu = () => {
     if (isDeletingAccount) {
       return (
@@ -68,8 +70,30 @@ export function MainMenu({ playerName, setPlayerName }: Props) {
         setPlayerSign={setPlayerSign}
         setIsChangingPassword={setIsChangingPassword}
         setIsDeletingAccount={setIsDeletingAccount}
+        isChangingPassword={isChangingPassword}
+        isDeletingAccount={isDeletingAccount}
+        isManagingLobby={isManagingLobby}
       >
-        <DynamicMenu />
+        {isChangingPassword && (
+          <ChangePasswordForm
+            playerName={playerName}
+            setIsChangingPassword={setIsChangingPassword}
+          />
+        )}
+        {isDeletingAccount && (
+          <DeleteAccountForm
+            playerName={playerName}
+            setPlayerName={setPlayerName}
+            setPlayerSign={setPlayerSign}
+          />
+        )}
+        {isManagingLobby && (
+          <Lobby
+            playerName={playerName}
+            setPlayerSign={setPlayerSign}
+            setHasGameStarted={setHasGameStarted}
+          />
+        )}
       </PlayerMenu>
     </>
   );

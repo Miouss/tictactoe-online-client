@@ -66,23 +66,28 @@ export function Lobby({ playerName, setPlayerSign, setHasGameStarted }: Props) {
       joiningLobbyId?: string
     ) => {
       const hasJoinedLobby = joinedLobbyId !== "";
+      const isJoiningDifferentLobby =
+        hasJoinedLobby && joiningLobbyId !== joinedLobbyId;
 
-      if (
-        hasJoinedLobby &&
-        joiningLobbyId !== joinedLobbyId &&
-        action !== "leave"
-      ) {
+      const hasToLeaveLobby =
+        (isJoiningDifferentLobby && action === "join") ||
+        (hasJoinedLobby && action === "leave");
+
+      if (hasToLeaveLobby) {
         await leaveLobby();
       }
 
       switch (action) {
         case "create":
+          console.log("create lobby");
           createLobby();
           break;
         case "join":
+          console.log("join lobby");
           joinLobby(joiningLobbyId!);
           break;
         case "leave":
+          console.log("leave lobby");
           await leaveLobby();
           break;
       }
@@ -99,7 +104,9 @@ export function Lobby({ playerName, setPlayerSign, setHasGameStarted }: Props) {
   }, [lobbyTriggerAction, joiningLobbyId]);
 
   useEffect(() => {
+    console.log("component is mounted");
     return () => {
+      console.log("component is unmounted");
       socket.emit("leaveLobby", currentPlayer);
     };
   }, []);

@@ -11,6 +11,9 @@ interface Props {
   setPlayerSign: Dispatch<SetStateAction<SideSign | undefined>>;
   setIsChangingPassword: Dispatch<SetStateAction<boolean>>;
   setIsDeletingAccount: Dispatch<SetStateAction<boolean>>;
+  isChangingPassword: boolean;
+  isDeletingAccount: boolean;
+  isManagingLobby: boolean;
   children?: React.ReactNode;
 }
 
@@ -20,6 +23,9 @@ export function PlayerMenu({
   setPlayerSign,
   setIsChangingPassword,
   setIsDeletingAccount,
+  isChangingPassword,
+  isDeletingAccount,
+  isManagingLobby,
   children,
 }: Props) {
   return (
@@ -27,8 +33,21 @@ export function PlayerMenu({
       <label style={{ textAlign: "center" }}>{playerName}</label>
       {children}
       <FlexBox direction="column">
-        <ChangePasswordButton setIsChangingPassword={setIsChangingPassword} />
-        <DelAccountButton setIsDeletingAccount={setIsDeletingAccount} />
+        {!isManagingLobby && (
+          <button
+            onClick={() => {
+              setIsChangingPassword(false), setIsDeletingAccount(false);
+            }}
+          >
+            Manage Lobby
+          </button>
+        )}
+        {!isChangingPassword && (
+          <ChangePasswordButton setIsChangingPassword={setIsChangingPassword} />
+        )}
+        {!isDeletingAccount && (
+          <DelAccountButton setIsDeletingAccount={setIsDeletingAccount} />
+        )}
         <LogoutButton
           setPlayerName={setPlayerName}
           setPlayerSign={setPlayerSign}
