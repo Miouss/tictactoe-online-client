@@ -1,8 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
 import { SideSign } from "@types";
-import { PlayerMenuLogoutButton as LogoutButton } from "./PlayerMenuLogoutButton";
-import { PlayerMenuDelAccountButton as DelAccountButton } from "./PlayerMenuDelAccountButton";
-import { PlayerMenuChangePasswordButton as ChangePasswordButton } from "./PlayerMenuChangePasswordButton";
+import {
+  ChangePasswordButton,
+  DeleteAccountButton,
+  LogoutButton,
+} from "./buttons";
 import { FlexBox } from "../../styles";
 
 interface Props {
@@ -46,7 +48,7 @@ export function PlayerMenu({
           <ChangePasswordButton setIsChangingPassword={setIsChangingPassword} />
         )}
         {!isDeletingAccount && (
-          <DelAccountButton setIsDeletingAccount={setIsDeletingAccount} />
+          <DeleteAccountButton setIsDeletingAccount={setIsDeletingAccount} />
         )}
         <LogoutButton
           setPlayerName={setPlayerName}

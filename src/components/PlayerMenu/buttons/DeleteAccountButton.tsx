@@ -4,7 +4,7 @@ interface Props {
   setIsDeletingAccount: Dispatch<SetStateAction<boolean>>;
 }
 
-export function PlayerMenuDelAccountButton({ setIsDeletingAccount }: Props) {
+export function DeleteAccountButton({ setIsDeletingAccount }: Props) {
   return (
     <button onClick={() => setIsDeletingAccount(true)}>Delete Account</button>
   );

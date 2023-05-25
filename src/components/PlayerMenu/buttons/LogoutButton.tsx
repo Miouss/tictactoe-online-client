@@ -1,13 +1,13 @@
 import { SideSign } from "@types";
 import { Dispatch, SetStateAction } from "react";
-import { fetchServer } from "../../utils";
+import { fetchServer } from "../../../utils";
 
 interface Props {
   setPlayerName: Dispatch<SetStateAction<string>>;
   setPlayerSign: Dispatch<SetStateAction<SideSign | undefined>>;
 }
 
-export function PlayerMenuLogoutButton({
+export function LogoutButton({
   setPlayerName,
   setPlayerSign,
 }: Props) {
