@@ -1,11 +1,17 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useCallback } from "react";
 import { SideSign } from "@types";
 import {
   ChangePasswordButton,
   DeleteAccountButton,
   LogoutButton,
+  ManageLobbyButton,
 } from "./buttons";
 import { FlexBox } from "../../styles";
+import {
+  useChangePasswordBtn,
+  useDeleteAccountBtn,
+  useManageLobbyBtn,
+} from "./hooks";
 
 interface Props {
   playerName: string;
@@ -30,26 +36,30 @@ export function PlayerMenu({
   isManagingLobby,
   children,
 }: Props) {
+  const ManageLobbyBtn = useManageLobbyBtn(
+    isManagingLobby,
+    setIsChangingPassword,
+    setIsDeletingAccount
+  );
+
+  const ChangePasswordBtn = useChangePasswordBtn(
+    isChangingPassword,
+    setIsChangingPassword
+  );
+
+  const DeleteAccountBtn = useDeleteAccountBtn(
+    isDeletingAccount,
+    setIsDeletingAccount
+  );
+
   return (
     <FlexBox direction="column" gap="2rem">
       <label style={{ textAlign: "center" }}>{playerName}</label>
       {children}
       <FlexBox direction="column">
-        {!isManagingLobby && (
-          <button
-            onClick={() => {
-              setIsChangingPassword(false), setIsDeletingAccount(false);
-            }}
-          >
-            Manage Lobby
-          </button>
-        )}
-        {!isChangingPassword && (
-          <ChangePasswordButton setIsChangingPassword={setIsChangingPassword} />
-        )}
-        {!isDeletingAccount && (
-          <DeleteAccountButton setIsDeletingAccount={setIsDeletingAccount} />
-        )}
+        <ManageLobbyBtn />
+        <ChangePasswordBtn />
+        <DeleteAccountBtn />
         <LogoutButton
           setPlayerName={setPlayerName}
           setPlayerSign={setPlayerSign}

@@ -104,9 +104,7 @@ export function Lobby({ playerName, setPlayerSign, setHasGameStarted }: Props) {
   }, [lobbyTriggerAction, joiningLobbyId]);
 
   useEffect(() => {
-    console.log("component is mounted");
     return () => {
-      console.log("component is unmounted");
       socket.emit("leaveLobby", currentPlayer);
     };
   }, []);
