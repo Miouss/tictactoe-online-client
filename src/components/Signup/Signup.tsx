@@ -47,7 +47,7 @@ export function Signup({ setPlayerName }: Props) {
       <Actions>
         <ActionsButtons />
       </Actions>
-      <ConditionnalSubMenu displayed={isSubMenuOpen}>
+      <ConditionnalSubMenu displayType={isSubMenuOpen ? "block" : "none"}>
         {isCreatingAccount ? (
           <FormCreateAccount />
         ) : (
