@@ -94,16 +94,10 @@ export function Lobby({ playerName, setPlayerSign, setHasGameStarted }: Props) {
     };
 
     lobbyAction(lobbyTriggerAction, joiningLobbyId);
-
-    return () => {
-      if (joinedLobbyId) {
-        lobbyAction("leave", joiningLobbyId);
-        console.log("joiningLobbyId : ", joiningLobbyId);
-      }
-    };
   }, [lobbyTriggerAction, joiningLobbyId]);
 
   useEffect(() => {
+    socket.emit("leaveLobby", currentPlayer);
     return () => {
       socket.emit("leaveLobby", currentPlayer);
     };
