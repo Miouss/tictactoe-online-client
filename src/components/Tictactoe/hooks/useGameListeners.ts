@@ -3,6 +3,7 @@ import { Socket } from "socket.io-client";
 import { resetFields } from "../utils";
 import { GameIssue, ResetBoard, SquareId, SquareState } from "../types";
 import { SideSign } from "@types";
+import { GAME } from "../../../signals";
 
 export function useGameListeners(
   socket: Socket,
@@ -14,11 +15,11 @@ export function useGameListeners(
   setResetBoard: Dispatch<SetStateAction<ResetBoard>>
 ) {
   useEffect(() => {
-    socket.on("replayGame", () =>
+    socket.on(GAME.REPLAY, () =>
       resetFields(setSquaresStates, setGameIssue, setResetBoard)
     );
 
-    socket.on("moveMade", (socketId: string, squareId: SquareId) => {
+    socket.on(GAME.MOVE_MADE, (socketId: string, squareId: SquareId) => {
       const isMoveMadeByOpponent = socket.id !== socketId;
       if (isMoveMadeByOpponent) {
         setCanPlay(true);
@@ -37,7 +38,7 @@ export function useGameListeners(
       }
     });
 
-    socket.on("gameEnded", (gameIssue: GameIssue) => {
+    socket.on(GAME.OVER, (gameIssue: GameIssue) => {
       setGameIssue(gameIssue);
     });
   }, []);

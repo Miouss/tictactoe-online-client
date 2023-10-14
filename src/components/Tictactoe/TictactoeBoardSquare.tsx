@@ -5,6 +5,7 @@ import { Square } from "./styles";
 import { fullSize } from "../../styles";
 import { SquareId } from "./types";
 import { SideSign } from "../../types";
+import { GAME } from "../../signals";
 
 interface Props {
   playerSign: SideSign | undefined;
@@ -25,10 +26,10 @@ export function TictactoeBoardSquare({ playerSign, squareId }: Props) {
   };
 
   const makeMove = () => {
-    socket.emit("makeMove", squareId, socket.id);
+    socket.emit(GAME.MAKE_MOVE, squareId, socket.id);
   };
 
-  socket.on("moveMade", (socketId: string, squareIdPlayed: SquareId) => {
+  socket.on(GAME.MOVE_MADE, (socketId: string, squareIdPlayed: SquareId) => {
     if (squareIdPlayed !== squareId) return;
     if (socket.id === socketId) setIsPlayedByPlayer(true);
     else setIsPlayedByOpponent(true);

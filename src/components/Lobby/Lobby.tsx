@@ -9,6 +9,7 @@ import { Actions } from "./styles";
 import { LobbyAction } from "./types";
 import { Player, SideSign } from "@types";
 import { FlexBox } from "../../styles";
+import { LOBBY, PLAYER } from "../../signals";
 
 interface Props {
   playerName: string;
@@ -41,17 +42,17 @@ export function Lobby({ playerName, setPlayerSign, setHasGameStarted }: Props) {
     if (!lobbyTriggerAction) return;
 
     const createLobby = () => {
-      socket.emit("createLobby", currentPlayer);
+      socket.emit(LOBBY.CREATE, currentPlayer);
     };
 
     const joinLobby = (joiningLobbyId: string) => {
-      socket.emit("joinLobby", currentPlayer, joiningLobbyId);
+      socket.emit(LOBBY.JOIN, currentPlayer, joiningLobbyId);
     };
 
     const leaveLobby = () => {
       return new Promise((res) => {
-        socket.emit("leaveLobby", currentPlayer, joinedLobbyId);
-        socket.on("playerLeft", () => {
+        socket.emit(LOBBY.LEAVE, currentPlayer, joinedLobbyId);
+        socket.on(PLAYER.LEFT, () => {
           setPlayers([]);
           setJoinedLobbyId("");
           setPlayerSign(undefined);
@@ -97,9 +98,9 @@ export function Lobby({ playerName, setPlayerSign, setHasGameStarted }: Props) {
   }, [lobbyTriggerAction, joiningLobbyId]);
 
   useEffect(() => {
-    socket.emit("leaveLobby", currentPlayer);
+    socket.emit(LOBBY.LEAVE, currentPlayer);
     return () => {
-      socket.emit("leaveLobby", currentPlayer);
+      socket.emit(LOBBY.LEAVE, currentPlayer);
     };
   }, []);
 
