@@ -2,6 +2,7 @@ import { Socket } from "socket.io-client";
 import { Dispatch, SetStateAction } from "react";
 import { resetFields } from "./";
 import { SquareState, GameIssue, ResetBoard } from "../types";
+import { GAME } from "../../../signals";
 
 export function replayGame(
   socket: Socket,
@@ -10,5 +11,5 @@ export function replayGame(
   setResetSquares: Dispatch<SetStateAction<ResetBoard>>
 ) {
   resetFields(setSquaresStates, setGameIssue, setResetSquares);
-  socket.emit("replayGame", socket.id);
+  socket.emit(GAME.REPLAY, socket.id);
 }

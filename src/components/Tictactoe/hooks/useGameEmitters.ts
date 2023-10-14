@@ -3,6 +3,7 @@ import { Socket } from "socket.io-client";
 import { isGameWin } from "../utils";
 import { SquareState } from "../types";
 import { SideSign } from "@types";
+import { GAME } from "../../../signals";
 
 export function useGameEmitters(
   socket: Socket,
@@ -14,7 +15,7 @@ export function useGameEmitters(
     const hasWon = isGameWin(squaresStates, playerSign);
 
     if (hasWon) {
-      socket.emit("gameWin", socket.id);
+      socket.emit(GAME.WIN, socket.id);
     }
   }, [canPlay]);
 }
