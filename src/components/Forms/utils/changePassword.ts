@@ -11,14 +11,12 @@ export async function changePassword(
   const username = playerName;
   const { password, newPassword } = getPasswords(event);
   const method = "PATCH";
-  const headers = { "Content-Type": "application/json" };
-  const credentials = "include" as RequestCredentials;
   const body = JSON.stringify({ username, password, newPassword });
-  const url = "http://localhost:3001/api/account/password";
-  const options = { method, headers, body, credentials };
+  const endpoint = "account/password";
+  const options = { method, body };
 
   try {
-    const data = await fetchServer(url, options);
+    const data = await fetchServer(endpoint, options);
     alert(data.message);
     setIsChangingPassword(false);
   } catch (err: any) {

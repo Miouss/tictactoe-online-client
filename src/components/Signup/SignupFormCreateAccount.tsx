@@ -10,7 +10,7 @@ import {
   Submit,
 } from "../../styles";
 
-export function SignupCreateAccount() {
+export function SignupFormCreateAccount() {
   const passwordRef = useRef<HTMLInputElement>(null);
   const passwordConfirmRef = useRef<HTMLInputElement>(null);
 
@@ -18,7 +18,10 @@ export function SignupCreateAccount() {
     <Form onSubmit={createAccount}>
       <Username />
       <Password ref={passwordRef} />
-      <PasswordConfirm ref={passwordConfirmRef} onChange={() => validatePassword(passwordRef, passwordConfirmRef)} />
+      <PasswordConfirm
+        ref={passwordConfirmRef}
+        onChange={() => validatePassword(passwordRef, passwordConfirmRef)}
+      />
       <Email />
       <Submit> Create Account </Submit>
     </Form>

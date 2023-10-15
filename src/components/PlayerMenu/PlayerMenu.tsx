@@ -1,11 +1,6 @@
-import { Dispatch, SetStateAction, useCallback } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { SideSign } from "@types";
-import {
-  ChangePasswordButton,
-  DeleteAccountButton,
-  LogoutButton,
-  ManageLobbyButton,
-} from "./buttons";
+import { LogoutButton } from "./buttons";
 import { FlexBox } from "../../styles";
 import {
   useChangePasswordBtn,

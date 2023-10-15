@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Signup, MainMenu } from "./components";
 import { FlexBox } from "./styles";
 import { Route, Routes, useNavigate, useSearchParams } from "react-router-dom";
-import { SERVER_URL } from "./config";
 import { fetchServer } from "./utils";
 
 export default function App() {
@@ -21,9 +20,8 @@ export default function App() {
     if (searchParams.has("token")) {
       const token = searchParams.get("token");
       const method = "PUT";
-      const headers = { "Content-Type": "application/json" };
-      const url = `${SERVER_URL}/api/account?token=${token}`;
-      const options = { method, headers };
+      const url = `account?token=${token}`;
+      const options = { method };
 
       const handleFetch = async () => {
         try {

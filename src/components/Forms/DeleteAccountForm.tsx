@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
 import { Form, Password, Submit } from "../../styles";
-import { fetchServer } from "../../utils";
 import { SideSign } from "@types";
 import { deleteAccount } from "./utils";
 

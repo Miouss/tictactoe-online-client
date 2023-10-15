@@ -5,7 +5,6 @@ export async function createAccount(event: React.FormEvent<HTMLFormElement>) {
   event.preventDefault();
 
   const method = "POST";
-  const headers = { "Content-Type": "application/json" };
 
   const { username, password, email } = getCredentials(event);
 
@@ -15,12 +14,11 @@ export async function createAccount(event: React.FormEvent<HTMLFormElement>) {
     email,
   });
 
-  const url = "http://localhost:3001/api/account";
-  const options = { method, headers, body };
+  const endpoint = "account";
+  const options = { method, body };
 
   try {
-    const data = await fetchServer(url, options);
-    console.log(data);
+    await fetchServer(endpoint, options);
     alert(`Account created for ${username} !`);
   } catch (error: any) {
     alert(`Error ${error.status}: ${error.message}`);

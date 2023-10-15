@@ -1,19 +1,14 @@
 import { Dispatch, SetStateAction } from "react";
 import { login } from "./utils";
-import {
-  Form,
-  Username,
-  Password,
-  Submit,
-} from "../../styles";
+import { Form, Username, Password, Submit } from "../../styles";
 
 interface Props {
   setPlayerName: Dispatch<SetStateAction<string>>;
 }
 
-export function SignupLogin({ setPlayerName }: Props) {
+export function SignupFormLogin({ setPlayerName }: Props) {
   return (
-    <Form onSubmit={(event) => login(event, setPlayerName)}>
+    <Form onSubmit={(e) => login(e, setPlayerName)}>
       <Username />
       <Password />
       <Submit>Login</Submit>

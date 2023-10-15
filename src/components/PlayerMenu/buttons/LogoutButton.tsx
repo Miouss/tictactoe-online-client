@@ -7,18 +7,14 @@ interface Props {
   setPlayerSign: Dispatch<SetStateAction<SideSign | undefined>>;
 }
 
-export function LogoutButton({
-  setPlayerName,
-  setPlayerSign,
-}: Props) {
+export function LogoutButton({ setPlayerName, setPlayerSign }: Props) {
   const logout = async () => {
     const method = "DELETE";
-    const credentials = "include" as RequestCredentials;
-    const url = "http://localhost:3001/api/login";
-    const options = { method, credentials };
+    const endpoint = "login";
+    const options = { method };
 
     try {
-      const data = await fetchServer(url, options);
+      await fetchServer(endpoint, options);
       setPlayerName("");
       setPlayerSign(undefined);
     } catch (err) {

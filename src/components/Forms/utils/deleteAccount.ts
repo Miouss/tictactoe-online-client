@@ -14,14 +14,12 @@ export async function deleteAccount(
   const password = event.currentTarget.password.value;
 
   const method = "DELETE";
-  const headers = { "Content-Type": "application/json" };
-  const credentials = "include" as RequestCredentials;
   const body = JSON.stringify({ username, password });
-  const url = "http://localhost:3001/api/account";
-  const options = { method, headers, body, credentials };
+  const endpoint = "account";
+  const options = { method, body };
 
   try {
-    const data = await fetchServer(url, options);
+    const data = await fetchServer(endpoint, options);
     setPlayerName("");
     setPlayerSign(undefined);
     alert(data.message);

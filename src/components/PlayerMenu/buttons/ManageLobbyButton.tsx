@@ -10,7 +10,8 @@ export function ManageLobbyButton({
   setIsDeletingAccount,
 }: Props) {
   const resetMenu = () => {
-    setIsChangingPassword(false), setIsDeletingAccount(false);
+    setIsChangingPassword(false);
+    setIsDeletingAccount(false);
   };
 
   return <button onClick={resetMenu}>Manage Lobby</button>;

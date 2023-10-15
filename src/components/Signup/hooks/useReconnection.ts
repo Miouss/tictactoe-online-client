@@ -6,16 +6,14 @@ export function useReconnection(
 ) {
   useEffect(() => {
     const method = "POST";
-    const credentials = "include" as RequestCredentials;
-    const url = "http://localhost:3001/api/login/refresh";
-    const options = { method, credentials };
+    const endpoint = "login/refresh";
+    const options = { method };
 
     const reconnect = async () => {
       try {
-        const data = await fetchServer(url, options);
-        const { username } = data;
+        const data = await fetchServer(endpoint, options);
         console.log("reconnected");
-        setPlayerName(username);
+        setPlayerName(data.username);
       } catch (err) {
         console.error(err);
       }
