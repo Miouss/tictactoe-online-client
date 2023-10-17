@@ -15,7 +15,7 @@ export function LobbyFormJoinLobby({
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        setLobbyTriggerAction("join");
+        setLobbyTriggerAction(LobbyAction.JOIN);
         setJoiningLobbyId(e.currentTarget.lobbyId.value);
       }}
     >

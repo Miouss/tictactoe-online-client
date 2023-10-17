@@ -10,7 +10,7 @@ export function LobbyActionButtonLeaveLobby({ setLobbyTriggerAction }: Props) {
   return (
     <ActionButton
       label="Leave Lobby"
-      action="leave"
+      action={LobbyAction.LEAVE}
       setLobbyTriggerAction={setLobbyTriggerAction}
     />
   );

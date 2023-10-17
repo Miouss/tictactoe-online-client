@@ -10,7 +10,7 @@ export function LobbyActionButtonCreateLobby({ setLobbyTriggerAction }: Props) {
   return (
     <ActionButton
       label="Create Lobby"
-      action="create"
+      action={LobbyAction.CREATE}
       setLobbyTriggerAction={setLobbyTriggerAction}
     />
   );

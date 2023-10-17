@@ -71,27 +71,20 @@ export function Lobby({ playerName, setPlayerSign, setHasGameStarted }: Props) {
         hasJoinedLobby && joiningLobbyId !== joinedLobbyId;
 
       const hasToLeaveLobby =
-        (isJoiningDifferentLobby && action === "join") ||
-        (hasJoinedLobby && action === "leave");
+        (isJoiningDifferentLobby && action === LobbyAction.JOIN) ||
+        (hasJoinedLobby && action === LobbyAction.LEAVE);
 
       if (hasToLeaveLobby) {
         await leaveLobby();
       }
 
-      switch (action) {
-        case "create":
-          console.log("create lobby");
-          createLobby();
-          break;
-        case "join":
-          console.log("join lobby");
-          joinLobby(joiningLobbyId!);
-          break;
-        case "leave":
-          console.log("leave lobby");
-          await leaveLobby();
-          break;
-      }
+      const lobbyActionByKey = {
+        [LobbyAction.CREATE]: () => createLobby(),
+        [LobbyAction.JOIN]: () => joinLobby(joiningLobbyId!),
+        [LobbyAction.LEAVE]: () => leaveLobby(),
+      };
+
+      lobbyActionByKey[action]();
     };
 
     lobbyAction(lobbyTriggerAction, joiningLobbyId);
