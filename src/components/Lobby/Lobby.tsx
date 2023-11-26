@@ -94,6 +94,20 @@ export function Lobby({ playerName, setPlayerSign, setHasGameStarted }: Props) {
     socket.emit(LOBBY.LEAVE, currentPlayer);
     return () => {
       socket.emit(LOBBY.LEAVE, currentPlayer);
+      socket.removeAllListeners(LOBBY.CREATED);
+      socket.removeAllListeners(LOBBY.JOINED);
+      socket.removeAllListeners(LOBBY.LEAVE);
+      socket.removeAllListeners(LOBBY.CREATED);
+      socket.removeAllListeners(LOBBY.JOINED);
+      socket.removeAllListeners(LOBBY.FULL);
+      socket.removeAllListeners(LOBBY.EXISTS);
+      socket.removeAllListeners(LOBBY.NOT_FOUND);
+      socket.removeAllListeners(PLAYER.JOINED);
+      socket.removeAllListeners(PLAYER.LEFT);
+      socket.removeAllListeners(PLAYER.NAME_TAKEN);
+      socket.removeAllListeners(PLAYER.ALREADY_JOINED);
+      socket.removeAllListeners(PLAYER.OPPONENT_LEFT);
+
     };
   }, []);
 

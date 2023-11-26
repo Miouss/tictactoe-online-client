@@ -1,6 +1,7 @@
 export enum GAME {
   MAKE_MOVE = "makeMove",
   WIN = "gameWin",
+  DRAW = "gameDraw",
   REPLAY = "replayGame",
   MOVE_MADE = "moveMade",
   OVER = "gameOver",
