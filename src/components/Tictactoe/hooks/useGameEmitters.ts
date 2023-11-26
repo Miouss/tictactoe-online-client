@@ -16,6 +16,13 @@ export function useGameEmitters(
 
     if (hasWon) {
       socket.emit(GAME.WIN, socket.id);
+      return;
+    }
+
+    const isDraw = squaresStates.every((squareState) => squareState !== null);
+
+    if (isDraw) {
+      socket.emit(GAME.DRAW, socket.id);
     }
   }, [canPlay]);
 }
